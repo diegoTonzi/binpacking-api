@@ -1,3 +1,3 @@
 # binpacking-api
 
-A simple api to use the binpacking core project.
+A simple api to expose the binpacking core project.
