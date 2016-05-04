@@ -12,12 +12,11 @@ public class ContainerResource {
 
 	
 	
-	public ContainerResource(Double width, Double length, Double height, Double weight, List<ItemResource> items) {
+	public ContainerResource(Double width, Double length, Double height, Double weight) {
 		this.width = width;
 		this.length = length;
 		this.height = height;
 		this.weight = weight;
-		this.items = items;
 	}
 
 	public Double getWidth() {
@@ -38,6 +37,10 @@ public class ContainerResource {
 
 	public List<ItemResource> getItems() {
 		return items;
+	}
+	
+	public void setItems(List<ItemResource> items){
+		this.items = items;
 	}
 
 }

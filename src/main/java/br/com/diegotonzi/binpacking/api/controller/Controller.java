@@ -16,9 +16,8 @@ import br.com.diegotonzi.binpacking.api.resource.ContainerResource;
 import br.com.diegotonzi.binpacking.controller.PackingController;
 import br.com.diegotonzi.binpacking.model.Item;
 import br.com.diegotonzi.binpacking.restrictions.UnlimitedContainer;
-import br.com.diegotonzi.binpacking.util.ItemHelper;
 
-@RestController("/packing/correios")
+@RestController("/pack/container")
 public class Controller {
 	
 	@Autowired
@@ -27,19 +26,10 @@ public class Controller {
 	ContainerMapper binMapper;
 
 	@ResponseBody
-	@RequestMapping(value = "/pac", method = RequestMethod.POST, consumes="application/json", produces="application/json")
+	@RequestMapping(value = "/unlimited", method = RequestMethod.POST, consumes="application/json", produces="application/json")
 	public List<ContainerResource> pack(@RequestBody List<ItemDto> items){
-		List<Item> ItemsModel = itemMapper.toModel(items);
-		PackingController controller = new PackingController(ItemsModel, new UnlimitedContainer());
-		controller.arrangeItens();
-		return binMapper.toResource(controller.getContainers());
-	}
-	
-	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET, produces="application/json")
-	public List<ContainerResource> packTest(){
-		List<Item> ItemsModel = ItemHelper.getRandomItens(1000);
-		PackingController controller = new PackingController(ItemsModel, new UnlimitedContainer());
+		List<Item> modelItems = itemMapper.toModel(items);
+		PackingController controller = new PackingController(modelItems, new UnlimitedContainer());
 		controller.arrangeItens();
 		return binMapper.toResource(controller.getContainers());
 	}

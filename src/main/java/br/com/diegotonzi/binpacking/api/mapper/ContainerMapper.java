@@ -6,19 +6,38 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.diegotonzi.binpacking.api.dto.ContainerDto;
 import br.com.diegotonzi.binpacking.api.resource.ContainerResource;
-import br.com.diegotonzi.binpacking.api.resource.ItemResource;
 import br.com.diegotonzi.binpacking.model.Container;
+import br.com.diegotonzi.binpacking.restrictions.LimitedContainer;
 
 @Component
 public class ContainerMapper {
 	
 	@Autowired
 	ItemMapper itemMapper;
+	
+	public Container toModel(ContainerDto dto){
+		LimitedContainer restrictions = new LimitedContainer(dto.getMaxWidth(), dto.getMaxLength(), dto.getMaxHeight(), dto.getMaxWeight());
+		restrictions.setMinWidth(dto.getMinWidth());
+		restrictions.setMinLength(dto.getMinLength());
+		restrictions.setMinHeight(dto.getMinHeight());
+		restrictions.setMinWeight(dto.getMinWeight());
+		restrictions.setMaxTotalSize(dto.getMaxTotalSize());
+		return new Container(restrictions);
+	}
+	
+	public List<Container> toModel(List<ContainerDto> dtos){
+		List<Container> containers = new ArrayList<>();
+		for (ContainerDto containerDto : dtos) {
+			containers.add(toModel(containerDto));
+		}
+		return containers;
+	}
 
 	public ContainerResource toResource(Container container){
-		List<ItemResource> itemResources = itemMapper.toResource(container.getItems());
-		ContainerResource containerResource = new ContainerResource(container.getMeasures().getWidth(), container.getMeasures().getLength(), container.getMeasures().getHeight(), container.getMeasures().getWeight(), itemResources);
+		ContainerResource containerResource = new ContainerResource(container.getMeasures().getWidth(), container.getMeasures().getLength(), container.getMeasures().getHeight(), container.getMeasures().getWeight());
+		containerResource.setItems(itemMapper.toResource(container.getItems()));
 		return containerResource;
 	}
 	

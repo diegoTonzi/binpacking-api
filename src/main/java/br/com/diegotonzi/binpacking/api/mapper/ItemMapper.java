@@ -3,6 +3,7 @@ package br.com.diegotonzi.binpacking.api.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import br.com.diegotonzi.binpacking.api.dto.ItemDto;
@@ -14,18 +15,32 @@ import br.com.diegotonzi.binpacking.model.Measures;
 @Component
 public class ItemMapper {
 
-	public Item toModel(ItemDto dto) {
+	private long count = 0;
+	
+	public List<Item> toModel(ItemDto dto) {
 		MeasuresDto measuresDto = dto.getMeasures();
 		Measures measures = new Measures(measuresDto.getWidth(), measuresDto.getLength(), measuresDto.getHeight(), measuresDto.getWeight());
-		Item item = new Item(measures, dto.getId(), dto.isRotateVerticaly());
-		item.setDescription(dto.getDescription());
-		return item;
+		
+		List<Item> items = new ArrayList<>();
+		for (int i = 0; i < dto.getQuantity(); i++) {
+			if(StringUtils.isBlank(dto.getId())){
+				long id = count++;
+				String idStr = StringUtils.leftPad(String.valueOf(id), 4, "0");
+				dto.setId(idStr);
+			}
+			
+			Item item = new Item(measures, dto.getId(), dto.isRotateVerticaly());
+			item.setDescription(dto.getDescription());
+			items.add(item);
+		}
+		
+		return items;
 	}
 
 	public List<Item> toModel(List<ItemDto> dtos) {
 		List<Item> items = new ArrayList<>();
 		for (ItemDto dto : dtos) {
-			items.add(toModel(dto));
+			items.addAll(toModel(dto));
 		}
 		return items;
 	}
@@ -51,6 +66,10 @@ public class ItemMapper {
 			resources.add(toResource(item));
 		}
 		return resources;
+	}
+	
+	public void resetIds(){
+		this.count = 0;
 	}
 
 }
