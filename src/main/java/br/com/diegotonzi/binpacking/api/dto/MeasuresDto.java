@@ -1,11 +1,11 @@
-package br.com.diegotonzi.binpacking.dto;
+package br.com.diegotonzi.binpacking.api.dto;
 
-public class ItemDto {
-
-	private Double width;
-	private Double length;
-	private Double height;
-	private Double weight;
+public class MeasuresDto {
+	
+	public Double width;
+	public Double length;
+	public Double height;
+	public Double weight;
 
 	public Double getWidth() {
 		return width;
