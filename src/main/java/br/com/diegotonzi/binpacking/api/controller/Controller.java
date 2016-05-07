@@ -17,7 +17,7 @@ import br.com.diegotonzi.binpacking.controller.PackingController;
 import br.com.diegotonzi.binpacking.model.Item;
 import br.com.diegotonzi.binpacking.restrictions.UnlimitedContainer;
 
-@RestController("/pack/container")
+@RestController
 public class Controller {
 	
 	@Autowired

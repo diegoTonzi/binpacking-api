@@ -10,7 +10,7 @@ import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "br.com.diegotonzi.binpacking" })
+@ComponentScan(basePackages = { "br.com.diegotonzi.binpacking.api" })
 public class AppConfig {
 
 	@Bean(name = "messageSource")
