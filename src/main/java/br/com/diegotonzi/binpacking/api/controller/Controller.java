@@ -19,8 +19,10 @@ import br.com.diegotonzi.binpacking.controller.PackingController;
 import br.com.diegotonzi.binpacking.model.Container;
 import br.com.diegotonzi.binpacking.model.Item;
 import br.com.diegotonzi.binpacking.restrictions.UnlimitedContainer;
+import br.com.diegotonzi.binpacking.util.ItemHelper;
 
-@RestController("/pac")
+@RestController()
+@RequestMapping("/container")
 public class Controller {
 	
 	@Autowired
@@ -28,6 +30,14 @@ public class Controller {
 	@Autowired
 	private ContainerMapper containerMapper;
 
+	@RequestMapping(value = "/test", method = RequestMethod.GET, produces="application/json")
+	public Resource packTest(){
+		List<Item> modelItems = ItemHelper.getitems();
+		PackingController controller = new PackingController(modelItems, new UnlimitedContainer());
+		controller.arrangeItens();
+		return getResult(controller);
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/limited", method = RequestMethod.POST, consumes="application/json", produces="application/json")
 	public Resource packLimitedContainer(@RequestBody Request request){
