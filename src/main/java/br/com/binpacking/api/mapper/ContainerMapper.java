@@ -1,4 +1,4 @@
-package br.com.diegotonzi.binpacking.api.mapper;
+package br.com.binpacking.api.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.diegotonzi.binpacking.api.dto.ContainerDto;
-import br.com.diegotonzi.binpacking.api.resource.ContainerResource;
-import br.com.diegotonzi.binpacking.model.Container;
-import br.com.diegotonzi.binpacking.restrictions.LimitedContainer;
+import br.com.binpacking.api.dto.ContainerDto;
+import br.com.binpacking.api.resource.ContainerResource;
+import br.com.binpacking.model.Container;
+import br.com.binpacking.restrictions.LimitedContainer;
 
 @Component
 public class ContainerMapper {

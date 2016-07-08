@@ -1,4 +1,4 @@
-package br.com.diegotonzi.binpacking.api.mapper;
+package br.com.binpacking.api.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +6,11 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import br.com.diegotonzi.binpacking.api.dto.ItemDto;
-import br.com.diegotonzi.binpacking.api.dto.MeasuresDto;
-import br.com.diegotonzi.binpacking.api.resource.ItemResource;
-import br.com.diegotonzi.binpacking.model.Item;
-import br.com.diegotonzi.binpacking.model.Measures;
+import br.com.binpacking.api.dto.ItemDto;
+import br.com.binpacking.api.dto.MeasuresDto;
+import br.com.binpacking.api.resource.ItemResource;
+import br.com.binpacking.model.Item;
+import br.com.binpacking.model.Measures;
 
 @Component
 public class ItemMapper {

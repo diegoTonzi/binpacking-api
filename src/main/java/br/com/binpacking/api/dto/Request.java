@@ -1,4 +1,4 @@
-package br.com.diegotonzi.binpacking.api.dto;
+package br.com.binpacking.api.dto;
 
 import java.util.List;
 

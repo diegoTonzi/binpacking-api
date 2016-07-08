@@ -1,4 +1,4 @@
-package br.com.diegotonzi.binpacking.api.resource;
+package br.com.binpacking.api.resource;
 
 import java.util.Calendar;
 import java.util.List;
